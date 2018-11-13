@@ -1,14 +1,10 @@
 import Link from 'next/link';
 
-const Sell = props => {
-  return (
-    <div>
-      <p>Welcome To Sell.</p>
-      <Link href="/" prefetch>
-        <a>Home!!</a>
-      </Link>
-    </div>
-  )
-}
+const Sell = props => (
+  <div>
+    <p>Welcome To Sell.</p>
+
+  </div>
+)
 
 export default Sell;
