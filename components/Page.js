@@ -17,7 +17,7 @@ class Page extends Component {
 }
 
 Page.propTypes = {
-
+  // TODO:
 };
 
 export default Page;
