@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 const MyButton = styled.button`
   background-color:red;
-  font-size: ${props => props.huge ? '100px': '50px'};
+  font-size: 50px;
   .poop {
     font-size: 100px;
   }
@@ -18,10 +18,6 @@ class Page extends Component {
       <div>
         <Meta />
         <p>This is coming from Page.</p>
-        <MyButton huge>
-          Click me!!
-          <span className="poop">💩</span>
-        </MyButton>
         <MyButton>
           Click me!!
           <span className="poop">💩</span>
