@@ -20,9 +20,30 @@ const Logo = styled.h1`
   }
 `;
 
+const StyledHeader = styled.header`
+  .bar {
+    border-bottom: 10px solid ${props => props.theme.black};
+    display: grid;
+    grid-template-columns: auto 1fr;
+    justify-content: space-between;
+    align-items: stretch;
+
+    @media (max-width: 1500px) {
+      grid-template-columns: 1fr;
+      justify-content: center;
+    }
+  }
+
+  .sub-bar {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    border-bottom: 1px solid ${props => props.theme.lightGrey};
+  }
+`
+
 const Header = () => {
   return (
-    <div>
+    <StyledHeader>
       <div>
         <img src='' alt='logo' />
       </div>
@@ -32,6 +53,7 @@ const Header = () => {
             <a>Dev Fits</a>
           </Link>
         </Logo>
+        <Nav />
       </div>
       <div className="sub-bar">
         <p>Search</p>
@@ -39,8 +61,7 @@ const Header = () => {
       <div>
         <p>Cart</p>
       </div>
-      <Nav />
-    </div>
+    </StyledHeader>
   );
 };
 
