@@ -14,7 +14,7 @@ const Logo = styled.h1`
     color: white;
     text-decoration: none;
   }
-  @media (max-width: 1500px) {
+  @media (max-width: ${props => props.theme.maxWidth}) {
       margin: 0;
       text-align: center;
   }
