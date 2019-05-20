@@ -44,9 +44,6 @@ const StyledHeader = styled.header`
 const Header = () => {
   return (
     <StyledHeader>
-      <div>
-        <img src='' alt='logo' />
-      </div>
       <div className="bar">
         <Logo>
           <Link href="/">
