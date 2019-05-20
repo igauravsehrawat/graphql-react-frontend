@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import styled, { ThemeProvider, injectGlobal } from 'styled-components';
 import Header from './Header';
 import Meta from './Meta';
-import styled, { ThemeProvider, injectGlobal } from 'styled-components';
 
 const theme = {
   red: '#FA0000',
@@ -17,14 +16,13 @@ const theme = {
 const StyledPage = styled.div`
   background-color: ${props => props.theme.offWhite};
   color: ${props => props.theme.black};
-`
+`;
 
 const Inner = styled.div`
   max-width: ${props => props.theme.maxWidth};
   margin: 0 auto;
   padding: 2rem;
-  background-color: ${props => props.theme.red};
-`
+`;
 
 injectGlobal`
   @font-face {
@@ -32,8 +30,7 @@ injectGlobal`
     src: url('../static/radnikanext-medium-webfont.woff2');
     font-weight: normal;
     font-style: normal;
-  }}
-
+  }
   html {
     box-sizing: border-box;
     font-size: 10px;
@@ -52,26 +49,20 @@ injectGlobal`
     text-decoration: none;
     color: ${theme.black};
   }
-`
+`;
+
 class Page extends Component {
   render() {
     return (
       <ThemeProvider theme={theme}>
         <StyledPage>
           <Meta />
-          <p>This is coming from Page.</p>
           <Header />
-          <Inner>
-            {this.props.children}
-          </Inner>
+          <Inner>{this.props.children}</Inner>
         </StyledPage>
       </ThemeProvider>
     );
   }
 }
-
-Page.propTypes = {
-  // TODO:
-};
 
 export default Page;
