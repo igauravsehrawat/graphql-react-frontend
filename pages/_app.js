@@ -12,7 +12,7 @@ class OverrideApp extends App {
     }
     // this exposes query to users
     pageProps.query = ctx.query;
-    return pageProps;
+    return { pageProps };
   }
 
   render () {
