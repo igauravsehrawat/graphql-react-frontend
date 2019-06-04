@@ -1,15 +1,32 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import Link from 'next/link';
+import ItemStyles from '../components/styles/ItemStyles';
+import Title from '../components/styles/Title';
+import PriceTag from '../components/styles/PriceTag';
 
 export default class Item extends Component {
     static propTypes = {
-        prop: PropTypes
+        // TODO: Do checks on item subset dictionary, id, title
+        item: PropTypes.object.isRequired
     }
 
     render() {
+        const { item } = this.props;
         return (
             <div>
-                An Item here
+                <ItemStyles>
+                    <Title>
+                        <Link
+                            href={{
+                                pathname: '/items',
+                                query: { id: item.id},
+                            }}>
+                            <a>{item.title}</a>
+                        </Link>
+                    </Title>
+                    <PriceTag>{item.price}</PriceTag>
+                </ItemStyles>
             </div>
         )
     }
