@@ -4,7 +4,7 @@ import Link from 'next/link';
 import ItemStyles from '../components/styles/ItemStyles';
 import Title from '../components/styles/Title';
 import PriceTag from '../components/styles/PriceTag';
-
+import formatMoney from '../lib/formatMoney';
 export default class Item extends Component {
     static propTypes = {
         // TODO: Do checks on item subset dictionary, id, title
@@ -25,7 +25,7 @@ export default class Item extends Component {
                             <a>{item.title}</a>
                         </Link>
                     </Title>
-                    <PriceTag>{item.price}</PriceTag>
+                    <PriceTag>({formatMoney(item.price)})</PriceTag>
                 </ItemStyles>
             </div>
         )
