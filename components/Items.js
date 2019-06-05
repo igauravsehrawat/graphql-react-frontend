@@ -6,7 +6,7 @@ import Item from './Item';
 
 const ALL_ITEMS_QUERY = gql`
     query ALL_ITEMS_QUERY {
-        item {
+        items {
             id
             title
             price
@@ -16,6 +16,9 @@ const ALL_ITEMS_QUERY = gql`
         }
     }
 `;
+const Center = styled.div`
+    text-align: center;
+`
 
 const ItemList = styled.div`
   display: grid;
@@ -28,10 +31,10 @@ const ItemList = styled.div`
 export default class Items extends Component {
     render() {
         return (
-            <div>
+            <Center>
                 <p>Items</p>
                 <Query query={ALL_ITEMS_QUERY}>
-                {(data, error, loading) => {
+                {({ data, error, loading }) => {
                     if (loading) return <p>Loading...</p>
                     if (error) return <p>Error: {error.message}</p>
                     return ( <ItemList>
@@ -40,7 +43,7 @@ export default class Items extends Component {
                 }}
                 </Query>
 
-            </div>
+            </Center>
         )
     }
 }
