@@ -5,6 +5,7 @@ import ItemStyles from '../components/styles/ItemStyles';
 import Title from '../components/styles/Title';
 import PriceTag from '../components/styles/PriceTag';
 import formatMoney from '../lib/formatMoney';
+import DeleteItem from './DeleteItem';
 export default class Item extends Component {
     static propTypes = {
         // TODO: Do checks on item subset dictionary, id, title
@@ -37,7 +38,7 @@ export default class Item extends Component {
                       <button>Edit ✏️</button>
                       </Link>
                       <button>Add To Cart🛒</button>
-                      <button>Delete</button>
+                      <DeleteItem id={item.id}>Delete this item</DeleteItem>
                   </div>
                 </ItemStyles>
             </div>

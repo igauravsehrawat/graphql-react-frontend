@@ -28,7 +28,7 @@ const ItemList = styled.div`
   margin: 0 auto;
 `;
 
-export default class Items extends Component {
+class Items extends Component {
     render() {
         return (
             <Center>
@@ -37,9 +37,11 @@ export default class Items extends Component {
                 {({ data, error, loading }) => {
                     if (loading) return <p>Loading...</p>
                     if (error) return <p>Error: {error.message}</p>
-                    return ( <ItemList>
+                    return (
+                      <ItemList>
                         {data.items.map(item => <Item item={item} key={item.id} />)}
-                    </ItemList>)
+                      </ItemList>
+                    )
                 }}
                 </Query>
 
@@ -47,3 +49,6 @@ export default class Items extends Component {
         )
     }
 }
+
+export default Items;
+export { ALL_ITEMS_QUERY };
