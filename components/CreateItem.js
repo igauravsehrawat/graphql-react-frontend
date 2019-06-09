@@ -44,6 +44,22 @@ class CreateItem extends Component {
       [name]: typeValue
     });
   };
+
+  handleUpload = async e => {
+    const { files } = e.target;
+    const data = new FormData();
+    data.append('file', files[0])
+    data.append('upload_preset', 'devFits');
+    const res = await fetch('https://api.cloudinary.com/v1_1/igauravsehrawat/image/upload', {
+      method: 'POST',
+      body: data,
+    });
+    const file = await res.json();
+    this.setState({
+      image: file.secure_url,
+      largeImage: file.eager[0].secure_url,
+    });
+  };
   render() {
     return (
       <Mutation mutation={CREATE_ITEM_MUTATION} variables={this.state}>
@@ -64,8 +80,17 @@ class CreateItem extends Component {
             >
             <Error error={error}/>
             <fieldset disabled={loading} aria-busy={loading}>
+              <label htmlFor="image">Image</label>
+              <input
+                id="image"
+                name="image"
+                type="file"
+                onChange={this.handleUpload}
+              />
+              {this.state.image && <img width="200" src={this.state.image} alt="Upload preview" />}
               <label htmlFor="title">Title</label>
               <input
+                id="title"
                 name="title"
                 type="text"
                 value={this.state.title}
@@ -75,6 +100,7 @@ class CreateItem extends Component {
               />
               <label htmlFor="price">Price</label>
               <input
+                id="price"
                 name="price"
                 type="number"
                 value={this.state.price}
@@ -84,6 +110,7 @@ class CreateItem extends Component {
               />
               <label htmlFor="description"></label>
               <textarea
+                id="description"
                 name="description"
                 value={this.state.description}
                 placeholder="Enter description"
