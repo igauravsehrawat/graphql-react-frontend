@@ -9,7 +9,7 @@ const CREATE_ITEM_MUTATION = gql`
   mutation CREATE_ITEM_MUTATION(
     $title: String!
     $description: String!
-    $price: Number
+    $price: Int!
     $image: String
     $largeImage: String
   ) {
@@ -17,9 +17,11 @@ const CREATE_ITEM_MUTATION = gql`
       title: $title
       description: $description
       price: $price
-    )
-  } {
-    id
+      image: $image
+      largeImage: $largeImage
+    ) {
+      id
+    }
   }
 `;
 
@@ -29,8 +31,8 @@ class CreateItem extends Component {
     title: 'this is title',
     description: 'this is description',
     price: 2000,
-    image: '',
-    largeImage: '',
+    image: 'image.jpg',
+    largeImage: 'large-image.jpg',
   };
 
   handleChange = (e) => {
@@ -45,7 +47,7 @@ class CreateItem extends Component {
   render() {
     return (
       <Mutation mutation={CREATE_ITEM_MUTATION} variables={this.state}>
-      {( createItem, {error, loading}) => (
+      {( createItem, {loading, error}) => (
           <Form onSubmit={
             async e => {
               // prevent default
@@ -53,7 +55,7 @@ class CreateItem extends Component {
               // call mutation
               const res = await createItem();
               console.log({ res });
-              //
+              // change the route
               Router.push({
                 pathname: '/item',
                 query: { id: res.data.createItem.id }
@@ -61,7 +63,7 @@ class CreateItem extends Component {
             }}
             >
             <Error error={error}/>
-            <fieldset disabled={loading} aria-={loading}>
+            <fieldset disabled={loading} aria-busy={loading}>
               <label htmlFor="title">Title</label>
               <input
                 name="title"
