@@ -21,11 +21,13 @@ const SINGLE_ITEM_QUERY = gql`
 
 const UPDATE_ITEM_MUTATION = gql`
   mutation UPDATE_ITEM_MUTATION(
-    $title: String!
-    $description: String!
-    $price: Int!
+    $id: ID!
+    $title: String
+    $description: String
+    $price: Int
   ) {
     updateItem(
+      id: $id
       title: $title
       description: $description
       price: $price
@@ -88,7 +90,7 @@ class UpdateItem extends Component {
         return (
       <Mutation mutation={UPDATE_ITEM_MUTATION} variables={this.state}>
       {( updateItem, {loading, error}) => (
-          <Form onSubmit={e => this.state.updateItem(e, updateItem)}>
+          <Form onSubmit={e => this.updateItem(e, updateItem)}>
             <Error error={error}/>
             <fieldset disabled={loading} aria-busy={loading}>
               <label htmlFor="title">Title</label>
