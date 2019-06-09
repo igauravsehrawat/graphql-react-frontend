@@ -7,7 +7,7 @@ import Error from '../components/ErrorMessage';
 
 const SINGLE_ITEM_QUERY = gql`
   query SINGLE_ITEM_QUERY(
-    $id: String!
+    $id: ID!
   ) {
     item(where: {
       id: $id
@@ -52,8 +52,13 @@ class UpdateItem extends Component {
       // prevent default
       e.preventDefault();
       // call mutation
-      const res = await updateItemMutation();
-      console.log({ res });
+      const res = await updateItemMutation({
+        variables: {
+          id: this.props.id,
+          ...this.state
+        }
+      });
+      console.log('Updated with!!', { res });
   }
 
   handleUpload = async e => {
@@ -78,10 +83,12 @@ class UpdateItem extends Component {
       >
       {({data, loading}) => {
         if (loading) <p>Loading...</p>
-        if (data.item.length===0 ) <p>No item found!!</p>
-      <Mutation mutation={UPDATE_ITEM_MUTATION} variables={data.item}>
-      {( createItem, {loading, error}) => (
-          <Form onSubmit={(e, updateItem) => this.state.updateItem}>
+        if (data.item) <p>No item found!!</p>
+        console.log({ data });
+        return (
+      <Mutation mutation={UPDATE_ITEM_MUTATION} variables={this.state}>
+      {( updateItem, {loading, error}) => (
+          <Form onSubmit={e => this.state.updateItem(e, updateItem)}>
             <Error error={error}/>
             <fieldset disabled={loading} aria-busy={loading}>
               <label htmlFor="title">Title</label>
@@ -89,7 +96,7 @@ class UpdateItem extends Component {
                 id="title"
                 name="title"
                 type="text"
-                defaultValue={this.props.title}
+                defaultValue={data.item.title}
                 placeholder="Enter title"
                 required={true}
                 onChange={this.handleChange}
@@ -99,7 +106,7 @@ class UpdateItem extends Component {
                 id="price"
                 name="price"
                 type="number"
-                defaultValue={this.props.price}
+                defaultValue={data.item.price}
                 placeholder="Enter price"
                 required={true}
                 onChange={this.handleChange}
@@ -108,7 +115,7 @@ class UpdateItem extends Component {
               <textarea
                 id="description"
                 name="description"
-                defaultValue={this.props.description}
+                defaultValue={data.item.description}
                 placeholder="Enter description"
                 required={true}
                 onChange={this.handleChange}
@@ -118,7 +125,7 @@ class UpdateItem extends Component {
           </Form>
       )}
       </Mutation>
-        }}
+        )}}
       </Query>
     )
   }
