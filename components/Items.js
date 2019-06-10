@@ -7,9 +7,9 @@ import Pagination from './Pagination';
 import { perPage } from '../config'
 
 const ALL_ITEMS_QUERY = gql`
-    query ALL_ITEMS_QUERY($skip: Int = 0 , $first: Int = ${perPage}) {
+    query ALL_ITEMS_QUERY($orderBy: ItemOrderByInput = createdAt_DESC, $skip: Int = 0 , $first: Int = ${perPage}) {
         items(
-          orderBy: createdAt_DESC,
+          orderBy: $orderBy,
           skip: $skip,
           first: $first,
         ) {
