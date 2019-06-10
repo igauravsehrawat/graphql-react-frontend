@@ -22,7 +22,8 @@ const Pagination = props => {
     {({data, loading, error}) => {
       if (error) return <Error error={error} />
       console.log({data});
-      const totalPages = parseFloat(data.itemsConnection.aggregate.count/perPage);
+        const count = data.itemsConnection.aggregate.count;
+      const totalPages = Math.ceil(count/perPage);
       const page = props.page;
       if (loading) return <p>Loading...</p>
       return (
@@ -34,7 +35,7 @@ const Pagination = props => {
           <a class="prev">◀◀ Prev</a>
         </Link>
         <p>{page} of {totalPages}</p>
-        <p>Total item {data.aggregate.count}</p>\
+        <p>Total item {data.itemsConnection.aggregate.count}</p>
         <Link prefetch href={{
             pathname: 'items',
             query: { page: props.page + 1 }
