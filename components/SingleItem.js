@@ -3,6 +3,7 @@ import { Query } from 'react-apollo';
 import styled from 'styled-components';
 import gql from 'graphql-tag';
 import Error from './ErrorMessage';
+import Head from 'next/head';
 
 const SINGLE_ITEM_QUERY = gql`
   query SINGLE_ITEM_QUERY($id: ID!) {
@@ -23,6 +24,8 @@ const SINGLE_ITEM_QUERY = gql`
 const SingleItemStyle = styled.div`
   max-width: 1200px;
   margin: 2rem auto;
+  // props and not this.props because <ThemeProvider passes theme in props
+  // And it is not part of component
   box-shadow: ${ props => props.theme.bs };
   display: grid;
   grid-auto-columns: 1fr;
@@ -47,11 +50,15 @@ class SingleItem extends Component {
         if (error) return <Error error={error} />
         if (loading) return <p>Loading...</p>
         if (!data.item) return <p> No item found for id {this.props.id}</p>
+        const item = data.item;
         return <SingleItemStyle>
-          <img src={data.item.largeImage} alt={data.item.title} />
+          <Head>
+            <title>Dev Fits | {item.title}</title>
+          </Head>
+          <img src={item.largeImage} alt={item.title} />
           <div className="details">
-            <h2>{data.item.title}</h2>
-            <p>{data.item.description}</p>
+            <h2>{item.title}</h2>
+            <p>{item.description}</p>
           </div>
         </SingleItemStyle>
       }}
