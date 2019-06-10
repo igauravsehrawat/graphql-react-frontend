@@ -5,7 +5,7 @@ import withData from '../lib/withData';
 
 // TODO: Check the incorrect extends of App message
 class OverrideApp extends App {
-  static async getInitialProps({Component, ctx}) {
+  static async getInitialProps({ Component, ctx }) {
     let pageProps = {};
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx);
@@ -15,13 +15,13 @@ class OverrideApp extends App {
     return { pageProps };
   }
 
-  render () {
+  render() {
     const { Component, apollo, pageProps } = this.props;
     return (
       <Container>
         <ApolloProvider client={apollo}>
           <Page>
-            <Component {...pageProps}/>
+            <Component {...pageProps} />
           </Page>
         </ApolloProvider>
       </Container>
