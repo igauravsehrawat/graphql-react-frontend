@@ -21,11 +21,22 @@ const SINGLE_ITEM_QUERY = gql`
 `
 
 const SingleItemStyle = styled.div`
+  max-width: 1200px;
+  margin: 2rem auto;
+  box-shadow: ${ props => props.theme.bs };
   display: grid;
   grid-auto-columns: 1fr;
   grid-auto-flow: column;
-  img {}
-  details {}
+  min-height: 800px;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contains;
+  }
+  .details {
+    margin: 3rem;
+    font-size: 2rem;
+  }
 `;
 
 class SingleItem extends Component {
