@@ -1,6 +1,7 @@
 import React from 'react';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
+import Head from 'next/head';
 import Link from 'next/link';
 import Error from './ErrorMessage';
 import PaginationStyles from './styles/PaginationStyles';
@@ -28,22 +29,25 @@ const Pagination = props => {
       if (loading) return <p>Loading...</p>
       return (
       <PaginationStyles>
+        <Head>
+            <title>Dev Fits -- Page {page} of {totalPages}</title>
+        </Head>
         <Link prefetch href={{
               pathname: 'items',
               query: { page: props.page - 1 }
             }}>
-          <a class="prev">◀◀ Prev</a>
+          <a className="prev" aria-disabled={props.page <= 1}>◀◀ Prev</a>
         </Link>
         <p>{page} of {totalPages}</p>
-        <p>Total item {data.itemsConnection.aggregate.count}</p>
+        <p>Total items {data.itemsConnection.aggregate.count}</p>
         <Link prefetch href={{
             pathname: 'items',
             query: { page: props.page + 1 }
           }}>
-            <a class="next">>> Next</a>
+            <a className="next" aria-disabled={props.page >= totalPages}>Next ▶▶</a>
           </Link>
       </PaginationStyles>
-        )
+      )
       }}
     </Query>
   )
