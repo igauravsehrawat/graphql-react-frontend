@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Signup from '../components/Signup';
 import styled from 'styled-components';
 

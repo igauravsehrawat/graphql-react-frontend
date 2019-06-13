@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Form from './styles/Form';
 import gql from 'graphql-tag';
-import {Mutation} from 'react-apollo';
+import { Mutation } from 'react-apollo';
 import Error from './ErrorMessage';
 
 const SIGNUP_MUTATION = gql`
@@ -25,10 +25,10 @@ export default class Signup extends Component {
     password: '',
   }
 
-  saveToState = (e)=> {
-    const {name, value} = e.target;
-    console.log({name, value});
-    this.setState({ [name]:  value });
+  saveToState = (e) => {
+    const { name, value } = e.target;
+    console.log({ name, value });
+    this.setState({ [name]: value });
   };
 
   render() {
@@ -36,49 +36,49 @@ export default class Signup extends Component {
       <Mutation mutation={SIGNUP_MUTATION} variables={{
         ...this.state
       }}>
-      {(signup, {data, error, loading}) => {
-        if (error) return <Error error={error} />
-        if (loading) return <p>Loading...</p>
-        return (
-        <Form method="post" onSubmit={async (e) => {
-          e.preventDefault();
-          await signup();
-          this.setState({name: '', email: '', password: ''})
-        }}>
-          <fieldset>
-            <label htmlFor="name">Name</label>
-            <input
-              id="name"
-              name="name"
-              type="text"
-              value={this.state.name}
-              placeholder="Enter name"
-              required={true}
-              onChange={this.saveToState}
-            />
-            <label htmlFor="email">email</label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              value={this.state.email}
-              placeholder="Enter email"
-              required={true}
-              onChange={this.saveToState}
-            />
-            <label htmlFor="password">password</label>
-            <input
-              id="password"
-              name="password"
-              type="password"
-              value={this.state.password}
-              placeholder="Enter password"
-              required={true}
-              onChange={this.saveToState}
-            />
-            <button type="submit">Sign Up Now!!</button>
-          </fieldset>
-        </Form>)
+        {(signup, { data, error, loading }) => {
+          if (error) return <Error error={error} />
+          if (loading) return <p>Loading...</p>
+          return (
+            <Form method="post" onSubmit={async (e) => {
+              e.preventDefault();
+              await signup();
+              this.setState({ name: '', email: '', password: '' })
+            }}>
+              <fieldset>
+                <label htmlFor="name">Name</label>
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  value={this.state.name}
+                  placeholder="Enter name"
+                  required={true}
+                  onChange={this.saveToState}
+                />
+                <label htmlFor="email">email</label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  value={this.state.email}
+                  placeholder="Enter email"
+                  required={true}
+                  onChange={this.saveToState}
+                />
+                <label htmlFor="password">password</label>
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  value={this.state.password}
+                  placeholder="Enter password"
+                  required={true}
+                  onChange={this.saveToState}
+                />
+                <button type="submit">Sign Up Now!!</button>
+              </fieldset>
+            </Form>)
         }}
       </Mutation>
     )
