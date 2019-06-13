@@ -11,8 +11,9 @@ const SIGNUP_MUTATION = gql`
       email: $email,
       password: $password,
     ) {
-      name,
+      id,
       email,
+      name,
     }
   }
 `;
@@ -41,8 +42,8 @@ export default class Signup extends Component {
         return (
         <Form method="post" onSubmit={async (e) => {
           e.preventDefault();
-          const res = await signup();
-          console.log(res);
+          await signup();
+          this.setState({name: '', email: '', password: ''})
         }}>
           <fieldset>
             <label htmlFor="name">Name</label>
@@ -59,7 +60,7 @@ export default class Signup extends Component {
             <input
               id="email"
               name="email"
-              type="text"
+              type="email"
               value={this.state.email}
               placeholder="Enter email"
               required={true}
