@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import NavStyles from './styles/NavStyles';
 import User from '../components/User';
+import Signout from '../components/Signout';
 
 const Nav = () => (
     <User>
@@ -28,6 +29,7 @@ const Nav = () => (
         <Link href="/">
           <a>Shop</a>
         </Link>
+        <Signout/>
       </NavStyles>
     )}
     </User>
