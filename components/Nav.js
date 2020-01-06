@@ -4,6 +4,7 @@ import User from '../components/User';
 import Signout from '../components/Signout';
 
 const Nav = () => (
+
     <User>
       {({data: { me }}) => (
       <NavStyles>
