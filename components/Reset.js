@@ -4,26 +4,29 @@ import gql from 'graphql-tag';
 import { Mutation } from 'react-apollo';
 import Error from './ErrorMessage';
 import { CURRENT_USER_QUERY } from './User';
+import PropTypes from 'prop-types';
 
-const SIGNUP_MUTATION = gql`
-  mutation SIGNUP_MUTATION($name: String!, $email: String!, $password: String!) {
-    signup(
-      name: $name,
-      email: $email,
+const RESET_MUTATION = gql`
+  mutation RESET_MUTATION($resetToken: String!, $password: String!, $confirmPassword: String!) {
+    resetPassword(
+      resetToken: $resetToken,
       password: $password,
+      confirmPassword: $confirmPassword,
     ) {
       id,
-      email,
       name,
+      email,
     }
   }
 `;
 
-export default class Signup extends Component {
+export default class Reset extends Component {
   state = {
-    name: '',
-    email: '',
     password: '',
+    confirmPassword: '',
+  }
+  static props = {
+    resetToken: PropTypes.string.isRequired,
   }
 
   saveToState = (e) => {
@@ -35,43 +38,25 @@ export default class Signup extends Component {
   render() {
     return (
       <Mutation
-        mutation={SIGNUP_MUTATION}
+        mutation={RESET_MUTATION}
         variables={{
-          ...this.state
+          resetToken: this.props.resetToken,
+          password: this.state.password,
+          confirmPassword: this.state.confirmPassword,
         }}
         refetchQueries={[{ query: CURRENT_USER_QUERY }]}
       >
-        {(signup, { data, error, loading }) => {
+        {(resetPassword, { data, error, loading }) => {
           if (error) return <Error error={error} />
           if (loading) return <p>Loading...</p>
           return (
             <Form method="post" onSubmit={async (e) => {
               e.preventDefault();
-              await signup();
-              this.setState({ name: '', email: '', password: '' })
+              await resetPassword();
+              this.setState({ password: '', confirmPassword: ''})
             }}>
               <fieldset>
-                <p>Sign Up</p>
-                <label htmlFor="name">Name</label>
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  value={this.state.name}
-                  placeholder="Enter name"
-                  required={true}
-                  onChange={this.saveToState}
-                />
-                <label htmlFor="email">email</label>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  value={this.state.email}
-                  placeholder="Enter email"
-                  required={true}
-                  onChange={this.saveToState}
-                />
+                <p>Reset Password</p>
                 <label htmlFor="password">password</label>
                 <input
                   id="password"
@@ -82,7 +67,17 @@ export default class Signup extends Component {
                   required={true}
                   onChange={this.saveToState}
                 />
-                <button type="submit">Sign Up Now!!</button>
+                <label htmlFor="confirmPassword">confirmPassword</label>
+                <input
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  type="password"
+                  value={this.state.confirmPassword}
+                  placeholder="Enter confirmPassword"
+                  required={true}
+                  onChange={this.saveToState}
+                />
+                <button type="submit">Reset My Password</button>
               </fieldset>
             </Form>)
         }}

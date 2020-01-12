@@ -5,10 +5,9 @@ import { Mutation } from 'react-apollo';
 import Error from './ErrorMessage';
 import { CURRENT_USER_QUERY } from './User';
 
-const SIGNUP_MUTATION = gql`
-  mutation SIGNUP_MUTATION($name: String!, $email: String!, $password: String!) {
-    signup(
-      name: $name,
+const SIGNIN_MUTATION = gql`
+  mutation SIGNIN_MUTATION($email: String!, $password: String!) {
+    signin(
       email: $email,
       password: $password,
     ) {
@@ -19,7 +18,7 @@ const SIGNUP_MUTATION = gql`
   }
 `;
 
-export default class Signup extends Component {
+export default class Signin extends Component {
   state = {
     name: '',
     email: '',
@@ -35,9 +34,9 @@ export default class Signup extends Component {
   render() {
     return (
       <Mutation
-        mutation={SIGNUP_MUTATION}
+        mutation={SIGNIN_MUTATION}
         variables={{
-          ...this.state
+        ...this.state
         }}
         refetchQueries={[{ query: CURRENT_USER_QUERY }]}
       >
@@ -51,17 +50,7 @@ export default class Signup extends Component {
               this.setState({ name: '', email: '', password: '' })
             }}>
               <fieldset>
-                <p>Sign Up</p>
-                <label htmlFor="name">Name</label>
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  value={this.state.name}
-                  placeholder="Enter name"
-                  required={true}
-                  onChange={this.saveToState}
-                />
+                <p>Sign In</p>
                 <label htmlFor="email">email</label>
                 <input
                   id="email"
@@ -82,7 +71,7 @@ export default class Signup extends Component {
                   required={true}
                   onChange={this.saveToState}
                 />
-                <button type="submit">Sign Up Now!!</button>
+                <button type="submit">Sign In</button>
               </fieldset>
             </Form>)
         }}
