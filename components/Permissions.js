@@ -43,7 +43,7 @@ const Permissions = props => (
               <th>👇</th>
             </tr>
           </thead>
-            <tbody>{data.users.map(user => <User user={user} key={user.id} />)}</tbody>
+            <tbody>{data.users.map(user => <UserPermissions user={user} key={user.id} />)}</tbody>
         </Table>
         )
       }
@@ -51,13 +51,32 @@ const Permissions = props => (
   </Query>
 )
 
-class User extends Component {
+class UserPermissions extends Component {
   static propTypes = PropTypes.shape({
     id: PropTypes.string,
     name: PropTypes.string,
     email: PropTypes.string,
     permissions: PropTypes.array,
   }).isRequired;
+
+  state = {
+    permissions: this.props.user.permissions,
+  }
+
+  handlePermissionChange = (e) => {
+    console.log(e.target.value, e.target, e.target.checked);
+    const value = e.target.value;
+    const checked = e.target.checked;
+    let updatedPermissions = [...this.state.permissions];
+    if (checked) {
+      updatedPermissions.push(e.target.value);
+    } else {
+      updatedPermissions = updatedPermissions.filter(permission => permission !== value);
+    }
+    this.setState({
+      permissions: updatedPermissions,
+    });
+  };
 
   render() {
     const {id, name, email} = this.props.user;
@@ -69,7 +88,10 @@ class User extends Component {
           {possiblePermissions.map(permission => (
           <td key={permission}>
             <label htmlFor={`${id}-permission-${permission}`}>
-              <input type='checkbox' />
+              <input type='checkbox' checked={this.state.permissions.includes(permission)}
+                value={permission}
+                onChange={this.handlePermissionChange}
+              />
             </label>
           </td>
           ))}
