@@ -4,6 +4,7 @@ import { Query } from 'react-apollo';
 import Error from '../components/ErrorMessage';
 import Table from '../components/styles/Table';
 import SickButton from '../components/styles/SickButton';
+import PropTypes from 'prop-types';
 
 export const possiblePermissions = [
   'ADMIN',
@@ -35,12 +36,14 @@ const Permissions = props => (
         return (
         <Table>
           <thead>
-            <td>Name</td>
-            <td>Email</td>
-            {possiblePermissions.map(value => <td>{value}</td>)}
-            <td>👇</td>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              {possiblePermissions.map(value => <th key={value}>{value}</th>)}
+              <th>👇</th>
+            </tr>
           </thead>
-            <tbody>{data.users.map(user => <User user={user}/>)}</tbody>
+            <tbody>{data.users.map(user => <User user={user} key={user.id} />)}</tbody>
         </Table>
         )
       }
@@ -49,6 +52,13 @@ const Permissions = props => (
 )
 
 class User extends Component {
+  static propTypes = PropTypes.shape({
+    id: PropTypes.string,
+    name: PropTypes.string,
+    email: PropTypes.string,
+    permissions: PropTypes.array,
+  }).isRequired;
+
   render() {
     const {id, name, email} = this.props.user;
 
@@ -57,7 +67,7 @@ class User extends Component {
         <td>{name}</td>
         <td>{email}</td>
           {possiblePermissions.map(permission => (
-          <td>
+          <td key={permission}>
             <label htmlFor={`${id}-permission-${permission}`}>
               <input type='checkbox' />
             </label>
