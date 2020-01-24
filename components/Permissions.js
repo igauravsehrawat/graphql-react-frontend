@@ -27,8 +27,8 @@ export const ALL_USERS_QUERY = gql`
 `;
 
 export const UPDATE_PERMISSIONS_MUTATION = gql`
-  mutation updatedPermissions($userId: String!, $permissions: [String]) {
-    updatePermission(
+  mutation updatedPermissions($userId: ID!, $permissions: [Permission]) {
+    updatePermissions(
       userId: $userId,
       permissions: $permissions,
     ) {
@@ -96,16 +96,16 @@ class UserPermissions extends Component {
       <Mutation
       mutation={UPDATE_PERMISSIONS_MUTATION}
       variables={{
-        userId: this.props.id,
-        permissions: this.props.permissions
+        userId: this.props.user.id,
+        permissions: this.state.permissions
         }}
         >
           {(updatePermissions, {loading, error, data}) => {
           return <>
           {error &&
           <tr>
-            <td colspan="8">
-              <Error/>
+            <td colSpan="8">
+              <Error error={error}/>
             </td>
           </tr>
           }
