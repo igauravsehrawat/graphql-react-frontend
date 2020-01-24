@@ -8,10 +8,10 @@ const Table = styled.table`
     font-size: 10px;
   }
   td,
-  th {
-    border-bottom: 1px solid ${props => props.theme.offWhite};
+  border-bottom: 1px solid ${props => props.theme.offWhite};
+    th {
     border-right: 1px solid ${props => props.theme.offWhite};
-    padding: 10px 5px;
+    padding: 5px;
     position: relative;
     &:last-child {
       border-right: none;
@@ -19,6 +19,11 @@ const Table = styled.table`
       button {
         width: 100%;
       }
+    }
+    label {
+      // background-color: red;
+      padding: 10px 5px;
+      display: block; // stretch out
     }
   }
   tr {
