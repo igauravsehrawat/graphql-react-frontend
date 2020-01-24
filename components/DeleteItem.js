@@ -33,6 +33,7 @@ class DeleteItem extends Component {
       variables={{ id: this.props.id }}
       update={this.onUpdate}
       >{(deleteItem, {loading ,error}) => {
+        {error && alert(error.message)}
       return <button onClick={
         e => {
           if(confirm('Are you sure?')) {
