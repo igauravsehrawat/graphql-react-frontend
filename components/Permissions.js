@@ -74,7 +74,7 @@ class UserPermissions extends Component {
     permissions: this.props.user.permissions,
   }
 
-  handlePermissionChange = (e) => {
+  handlePermissionChange = (e, updatePermissions) => {
     console.log(e.target.value, e.target, e.target.checked);
     const value = e.target.value;
     const checked = e.target.checked;
@@ -86,7 +86,7 @@ class UserPermissions extends Component {
     }
     this.setState({
       permissions: updatedPermissions,
-    });
+    }, updatePermissions);
   };
 
   render() {
@@ -117,14 +117,15 @@ class UserPermissions extends Component {
                 <label htmlFor={`${id}-permission-${permission}`}>
                   <input id={`${id}-permission-${permission}`} type='checkbox' checked={this.state.permissions.includes(permission)}
                     value={permission}
-                    onChange={this.handlePermissionChange}
+                    onChange={(e) => this.handlePermissionChange(e, updatePermissions)}
+                    // the passing the mutation outside
                     />
                 </label>
               </td>
               ))}
             <td>
               <SickButton type="button" disabled={loading} onClick={updatePermissions}
-              >{loading? 'Updating...': 'Update'}</SickButton></td>
+              >Updat{loading? 'ing': 'e'}</SickButton></td>
           </tr>
           </>
           }}
