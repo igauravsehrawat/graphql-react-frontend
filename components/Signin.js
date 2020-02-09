@@ -62,8 +62,8 @@ export default class Signin extends Component {
                   onChange={this.saveToState}
                 />
                 <label htmlFor="password">password</label>
-                  id="password"
                 <input
+                  id="password"
                   name="password"
                   type="password"
                   value={this.state.password}

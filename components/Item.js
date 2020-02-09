@@ -5,6 +5,7 @@ import ItemStyles from '../components/styles/ItemStyles';
 import Title from '../components/styles/Title';
 import PriceTag from '../components/styles/PriceTag';
 import formatMoney from '../lib/formatMoney';
+import AddToCart from './AddToCart';
 import DeleteItem from './DeleteItem';
 export default class Item extends Component {
     static propTypes = {
@@ -13,32 +14,38 @@ export default class Item extends Component {
     }
 
     render() {
-        const { item } = this.props;
+        const { item: {
+          id,
+          image,
+          title,
+          price,
+          description
+        }} = this.props;
         return (
             <div>
                 <ItemStyles>
-                    {item.image && <img src={item.image} />}
+                    {image && <img src={image} />}
                     <Title>
                         <Link
                             href={{
                                 pathname: '/item',
-                                query: { id: item.id},
+                                query: { id: id},
                             }}>
-                            <a>{item.title}</a>
+                            <a>{title}</a>
                         </Link>
                     </Title>
-                    <PriceTag>({formatMoney(item.price)})</PriceTag>
-                    <p>{item.description}</p>
+                    <PriceTag>({formatMoney(price)})</PriceTag>
+                    <p>{description}</p>
                   <div className="buttonList">
                       <Link
                         href={{
                           pathname: '/update',
-                          query: { id: item.id }
+                          query: { id: id }
                         }}>
                       <button>Edit ✏️</button>
                       </Link>
-                      <button>Add To Cart🛒</button>
-                      <DeleteItem id={item.id}>Delete this item</DeleteItem>
+                      <AddToCart id={id} />
+                      <DeleteItem id={id}>Delete this item</DeleteItem>
                   </div>
                 </ItemStyles>
             </div>
