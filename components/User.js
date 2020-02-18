@@ -15,6 +15,8 @@ const CURRENT_USER_QUERY = gql`
           id
           title
           price
+          description
+          image
         }
       }
     }
