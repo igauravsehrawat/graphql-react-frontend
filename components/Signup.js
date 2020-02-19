@@ -1,20 +1,20 @@
-import React, { Component } from 'react'
-import Form from './styles/Form';
+import React, { Component } from 'react';
 import gql from 'graphql-tag';
 import { Mutation } from 'react-apollo';
+import Form from './styles/Form';
 import Error from './ErrorMessage';
 import { CURRENT_USER_QUERY } from './User';
 
 const SIGNUP_MUTATION = gql`
-  mutation SIGNUP_MUTATION($name: String!, $email: String!, $password: String!) {
-    signup(
-      name: $name,
-      email: $email,
-      password: $password,
-    ) {
-      id,
-      email,
-      name,
+  mutation SIGNUP_MUTATION(
+    $name: String!
+    $email: String!
+    $password: String!
+  ) {
+    signup(name: $name, email: $email, password: $password) {
+      id
+      email
+      name
     }
   }
 `;
@@ -24,9 +24,9 @@ export default class Signup extends Component {
     name: '',
     email: '',
     password: '',
-  }
+  };
 
-  saveToState = (e) => {
+  saveToState = e => {
     const { name, value } = e.target;
     console.log({ name, value });
     this.setState({ [name]: value });
@@ -37,19 +37,22 @@ export default class Signup extends Component {
       <Mutation
         mutation={SIGNUP_MUTATION}
         variables={{
-          ...this.state
+          ...this.state,
         }}
         refetchQueries={[{ query: CURRENT_USER_QUERY }]}
       >
         {(signup, { data, error, loading }) => {
-          if (error) return <Error error={error} />
-          if (loading) return <p>Loading...</p>
+          if (error) return <Error error={error} />;
+          if (loading) return <p>Loading...</p>;
           return (
-            <Form method="post" onSubmit={async (e) => {
-              e.preventDefault();
-              await signup();
-              this.setState({ name: '', email: '', password: '' })
-            }}>
+            <Form
+              method="post"
+              onSubmit={async e => {
+                e.preventDefault();
+                await signup();
+                this.setState({ name: '', email: '', password: '' });
+              }}
+            >
               <fieldset>
                 <p>Sign Up</p>
                 <label htmlFor="name">Name</label>
@@ -59,7 +62,7 @@ export default class Signup extends Component {
                   type="text"
                   value={this.state.name}
                   placeholder="Enter name"
-                  required={true}
+                  required
                   onChange={this.saveToState}
                 />
                 <label htmlFor="email">email</label>
@@ -69,7 +72,7 @@ export default class Signup extends Component {
                   type="email"
                   value={this.state.email}
                   placeholder="Enter email"
-                  required={true}
+                  required
                   onChange={this.saveToState}
                 />
                 <label htmlFor="password">password</label>
@@ -79,14 +82,15 @@ export default class Signup extends Component {
                   type="password"
                   value={this.state.password}
                   placeholder="Enter password"
-                  required={true}
+                  required
                   onChange={this.saveToState}
                 />
                 <button type="submit">Sign Up Now!!</button>
               </fieldset>
-            </Form>)
+            </Form>
+          );
         }}
       </Mutation>
-    )
+    );
   }
 }
