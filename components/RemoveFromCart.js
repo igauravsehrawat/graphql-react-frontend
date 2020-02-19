@@ -28,11 +28,36 @@ export default class RemoveFromCart extends Component {
     id: PropTypes.string.isRequired,
   };
 
+  /**
+   *
+   * @param {*} cache apollo cache
+   * @param {*} payload server response
+   */
+  update = (cache, payload) => {
+    // read cache
+    // delete the item
+    // update the cache
+    const data = cache.readQuery({ query: CURRENT_USER_QUERY });
+    if (data && !data.me) return null;
+    data.me.cart = data.me.cart.filter(
+      cartItem => cartItem !== payload.removeFromCart.id
+    );
+    cache.writeQuery({ query: CURRENT_USER_QUERY, data });
+  };
+
   render() {
     return (
       <Mutation
         mutation={REMOVE_FROM_CART_MUTATION}
         refetchQueries={[{ query: CURRENT_USER_QUERY }]}
+        update={this.update}
+        optimisticResponse={{
+          __type: 'Mutation',
+          removeFromCart: {
+            __type: 'CartItem',
+            id: this.props.id,
+          },
+        }}
       >
         {(removeFromCart, { data, error, loading }) => (
           <BigButton
