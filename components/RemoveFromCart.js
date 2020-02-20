@@ -52,9 +52,9 @@ export default class RemoveFromCart extends Component {
         refetchQueries={[{ query: CURRENT_USER_QUERY }]}
         update={this.update}
         optimisticResponse={{
-          __type: 'Mutation',
+          __typename: 'Mutation',
           removeFromCart: {
-            __type: 'CartItem',
+            __typename: 'CartItem',
             id: this.props.id,
           },
         }}
