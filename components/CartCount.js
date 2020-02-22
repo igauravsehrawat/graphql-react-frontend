@@ -5,18 +5,18 @@ import styled from 'styled-components';
 //
 const AnimationStyles = styled.span`
   position: relative;
-  .count: {
+  .count {
     display: block;
     position: relative;
-    transition: all 0.2s;
+    transition: all 0.4s;
     backface-visibility: hidden;
   }
   /* Turns fill it and fill back*/
-  .count-enter: {
-    transform: rotateX(0.5turn);
+  .count-enter {
+    transform: scale(4) rotateX(0.5turn);
   }
-  .count-enter-active: {
-    transform: rotate(0);
+  .count-enter-active {
+    transform: rotateX(0);
   }
   .count-exit {
     top: 0;
@@ -24,7 +24,7 @@ const AnimationStyles = styled.span`
     transform: rotateX(0);
   }
   .count-exit-active {
-    transform: rotateX(0.5turn);
+    transform: scale(4) rotateX(0.5turn);
   }
 `;
 
@@ -51,7 +51,7 @@ const CartCount = ({ count }) => (
         className="count"
         classNames="count"
         key={count}
-        timeout={{ enter: 4000, exit: 4000 }}
+        timeout={{ enter: 400, exit: 400 }}
       >
         <Dot>{count}</Dot>
       </CSSTransition>
