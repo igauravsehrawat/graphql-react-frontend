@@ -29,7 +29,7 @@ const CartItem = ({ cartItem }) => (
       {' - '}
       {cartItem.quantity} &times; {formatMoney(cartItem.item.price)}
     </p>
-    <RemoveFromCart id={cartItem.item.id} />
+    <RemoveFromCart id={cartItem.id} />
   </CartItemStyles>
 );
 
