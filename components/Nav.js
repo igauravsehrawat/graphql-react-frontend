@@ -12,7 +12,9 @@ const Nav = () => (
       <NavStyles>
         {me && (
           <>
-            <Link href="/">{me.name}</Link>
+            <Link href="/">
+              <a>{me.name}</a>
+            </Link>
             <Link href="/sell">
               <a>Sell</a>
             </Link>
