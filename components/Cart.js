@@ -10,6 +10,7 @@ import User from './User';
 import CartItem from './CartItem';
 import calcTotalPrice from '../lib/calcTotalPrice';
 import formatMoney from '../lib/formatMoney';
+import TakeMyMoney from './TakeMyMoney';
 
 export const LOCAL_STATE_QUERY = gql`
   query {
@@ -62,7 +63,9 @@ export default class Cart extends Component {
               </header>
               <footer>
                 <p>Your total is {formatMoney(calcTotalPrice(me.cart))}</p>
-                <SickButton>Checkout</SickButton>
+                <TakeMyMoney>
+                  <SickButton>Checkout</SickButton>
+                </TakeMyMoney>
               </footer>
             </CartStyles>
           );
