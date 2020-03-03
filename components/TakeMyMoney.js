@@ -30,11 +30,12 @@ const totalItems = cart =>
   cart.reduce((tally, item) => tally + item.quantity, 0);
 
 class TakeMyMoney extends Component {
-  onToken = (res, createOrder) => {
+  onToken = async (res, createOrder) => {
     // manually call the mutation
-    createOrder({
+    const order = await createOrder({
       variables: { token: res.id },
     }).catch(err => alert(err.message));
+    console.log(order);
   };
 
   render() {
@@ -49,7 +50,9 @@ class TakeMyMoney extends Component {
               <StripeCheckout
                 name={me.name}
                 description={`Total of ${totalItems(me.cart)} items`}
-                image={me.cart.item && me.cart.item.image}
+                image={
+                  me.cart.length && me.cart[0].item && me.cart[0].item.image
+                }
                 stripeKey="pk_test_3X4xxalHxsddJSFXxNt5coU3"
                 currency="USD"
                 email={me.email}
