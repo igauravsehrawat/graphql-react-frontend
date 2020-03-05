@@ -65,7 +65,7 @@ export default class Order extends Component {
               </p>
               <div className="items">
                 {order.items.map(item => (
-                  <div classNames="order-item">
+                  <div key={item.id} classNames="order-item">
                     <img src={item.image} alt={item.description} />
                     <div classNames="item-details" key={item.id}>
                       <h2>{item.title}</h2>

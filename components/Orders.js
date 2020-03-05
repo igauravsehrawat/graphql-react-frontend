@@ -3,7 +3,7 @@ import gql from 'graphql-tag';
 import { Query, Mutation } from 'react-apollo';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
-import { format } from 'date-fns';
+import { format, formatDistance } from 'date-fns';
 import styled from 'styled-components';
 import Link from 'next/link';
 import formatMoney from '../lib/formatMoney';
@@ -37,6 +37,12 @@ const USER_ORDERS_QUERY = gql`
     }
   }
 `;
+
+const OrderUl = styled.ul`
+  display: grid;
+  grid-gap: 4rem;
+  grid-template-columns: repeat(auto-fit, minmax(40%, 1fr));
+`;
 export default class Order extends Component {
   render() {
     return (
@@ -53,30 +59,39 @@ export default class Order extends Component {
             if (error) return <p>Error: {error.message}</p>;
             const { orders } = data;
             return (
-              <OrderItemStyles>
+              <OrderUl>
                 {orders.map(order => (
-                  <div key={order.id}>
-                    <p>
-                      <span>Order ID:</span>
-                      <span>{order.id}</span>
-                    </p>
-                    <p>
-                      <span>Date</span>
-                      <span>
-                        {format(order.createdAt, 'MMMM d, YYYY h:mm a')}
-                      </span>
-                    </p>
-                    <p>
-                      <span>Order total</span>
-                      <span>{formatMoney(order.total)}</span>
-                    </p>
-                    <p>
-                      <span>Item Count</span>
-                      <span>{order.items.length}</span>
-                    </p>
-                  </div>
+                  <OrderItemStyles key={order.id}>
+                    <Link
+                      href={{
+                        pathname: '/order',
+                        query: { id: order.id },
+                      }}
+                    >
+                      <a>
+                        <div className="order-meta">
+                          <p>
+                            {order.items.reduce((a, b) => a + b.quantity, 0)}
+                            Items
+                          </p>
+                          <p>{order.items.length} Products</p>
+                          <p>{formatDistance(order.createdAt, new Date())}</p>
+                          <p>{formatMoney(order.total)}</p>
+                        </div>
+                        <div className="images">
+                          {order.items.map(item => (
+                            <img
+                              key={item.id}
+                              src={item.image}
+                              alt={item.description}
+                            />
+                          ))}
+                        </div>
+                      </a>
+                    </Link>
+                  </OrderItemStyles>
                 ))}
-              </OrderItemStyles>
+              </OrderUl>
             );
           }}
         </Query>
@@ -86,5 +101,5 @@ export default class Order extends Component {
 }
 
 Order.propTypes = {
-  id: PropTypes.string.isRequired,
+  page: PropTypes.number.isRequired,
 };
