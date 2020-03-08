@@ -1,3 +1,3 @@
 import Items from './index';
 
-export default Items
+export default Items;

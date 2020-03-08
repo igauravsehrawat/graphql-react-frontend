@@ -1,6 +1,6 @@
 import App, { Container } from 'next/app';
-import Page from '../components/Page';
 import { ApolloProvider } from 'react-apollo';
+import Page from '../components/Page';
 import withData from '../lib/withData';
 
 // TODO: Check the incorrect extends of App message
@@ -25,7 +25,7 @@ class OverrideApp extends App {
           </Page>
         </ApolloProvider>
       </Container>
-    )
+    );
   }
 }
 

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import SingleItem from '../components/SingleItem';
 
 class item extends Component {
@@ -12,7 +12,7 @@ class item extends Component {
          */}
         <SingleItem id={this.props.query.id} />
       </div>
-    )
+    );
   }
 }
 
