@@ -1,4 +1,4 @@
 // This is client side config only - don't put anything in here that shouldn't be public!
 export const endpoint = `http://localhost:4444`;
-export const prodEndpoint = `https://dev-fits-graphql.herokuapp.com/`;
+export const prodEndpoint = `https://graphql-backend.igauravsehrawat.com`;
 export const perPage = 4;
