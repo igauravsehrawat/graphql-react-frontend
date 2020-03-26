@@ -32,7 +32,7 @@ export default class Item extends Component {
               <a>{title}</a>
             </Link>
           </Title>
-          <PriceTag>({formatMoney(price)})</PriceTag>
+          <PriceTag>{formatMoney(price)}</PriceTag>
           <p>{description}</p>
           <div className="buttonList">
             <Link
