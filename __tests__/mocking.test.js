@@ -27,7 +27,6 @@ describe('mocking', () => {
 
   it('can fetch foods', async () => {
     const me = new Person('me', ['apple', 'oranges']);
-    console.log('meeee', me);
     me.fetchFood = jest.fn().mockResolvedValue(['apple', 'oranges']);
     const favFoods = await me.fetchFood();
     expect(favFoods).toContain('oranges');

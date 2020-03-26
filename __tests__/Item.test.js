@@ -11,31 +11,21 @@ const fakeItem = {
 };
 
 describe('Item', () => {
-  it('renders title and price', () => {
-    const rendered = shallow(<ItemComponent item={fakeItem} />);
-    console.log(rendered.debug());
-    const priceTag = rendered.find('PriceTag');
-    expect(priceTag.children().text()).toBe('€10');
-    expect(rendered.find('Title a').text()).toBe(fakeItem.title);
-  });
   it('renders img src and alt', () => {
     const rendered = shallow(<ItemComponent item={fakeItem} />);
-    console.log(rendered.debug());
-    const Img = rendered.find('Img');
-    expect(Img.children().text()).toBe('€10');
-    expect(rendered.find('Title a').text()).toBe(fakeItem.title);
+    const img = rendered.find('img');
+    expect(img.props().src).toBe(fakeItem.image);
+    expect(img.props().alt).toBe(fakeItem.title);
   });
-  it('renders title and pricetag', () => {
+  it('renders title and price tag', () => {
     const rendered = shallow(<ItemComponent item={fakeItem} />);
-    console.log(rendered.debug());
     const priceTag = rendered.find('PriceTag');
     expect(priceTag.children().text()).toBe('€10');
-    expect(rendered.find('Title a').text()).toBe(fakeItem.title);
+    expect(rendered.find('Title Link a').text()).toBe(fakeItem.title);
   });
 
   it('renders out the buttons properly', () => {
     const wrapper = shallow(<ItemComponent item={fakeItem} />);
-    console.log('wrapper', wrapper);
     const buttonList = wrapper.find('.buttonList');
     expect(buttonList.children()).toHaveLength(3);
     expect(buttonList.find('Link')).toHaveLength(1);

@@ -21,7 +21,7 @@ export default class Item extends Component {
     return (
       <div>
         <ItemStyles>
-          {image && <img src={image} />}
+          {image && <img src={image} alt={title} />}
           <Title>
             <Link
               href={{

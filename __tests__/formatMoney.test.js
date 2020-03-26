@@ -10,7 +10,7 @@ describe('format money function', () => {
 
   it('leaves cents for whole dollar', () => {
     expect(formatMoney(5000)).toEqual('€50');
-    expect(formatMoney(500000)).toEqual('€5, 000');
+    expect(formatMoney(500000)).toEqual('€5,000');
   });
 
   it('works for cents and whole dollar', () => {
