@@ -1,16 +1,22 @@
 import { shallow } from 'enzyme';
+import toJSON from 'enzyme-to-json';
 import ItemComponent from '../components/Item';
 
 const fakeItem = {
   id: 'abc',
   image: 'dog.jpg',
   largeImage: 'largeDog.jpg',
-  price: 1000,
+  price: 100,
   description: 'This is dummy description',
   title: 'This is title here',
 };
 
 describe('Item', () => {
+  it('renders and matches the snapshot', () => {
+    const wrapper = shallow(<ItemComponent item={fakeItem} />);
+    expect(toJSON(wrapper)).toMatchSnapshot();
+  });
+
   it('renders img src and alt', () => {
     const rendered = shallow(<ItemComponent item={fakeItem} />);
     const img = rendered.find('img');
