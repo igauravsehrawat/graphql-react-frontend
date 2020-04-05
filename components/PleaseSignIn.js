@@ -1,22 +1,25 @@
-import React, { Component } from 'react'
-import {CURRENT_USER_QUERY} from '../components/User';
-import SignIn from '../components/Signin';
+import React, { Component } from 'react';
 import { Query } from 'react-apollo';
+import { CURRENT_USER_QUERY } from './User';
+import SignIn from './Signin';
 
 const PleaseSignIn = props => (
   <Query query={CURRENT_USER_QUERY}>
-    {({data, loading}) => {
-      if (loading) { return <p>Loading...</p>}
+    {({ data, loading }) => {
+      if (loading) {
+        return <p>Loading...</p>;
+      }
       if (!data.me) {
-        return <div>
+        return (
+          <div>
             <p>Please Sign In</p>
             <SignIn />
           </div>
-      } else {
-        return props.children
+        );
       }
+      return props.children;
     }}
   </Query>
-)
+);
 
 export default PleaseSignIn;
