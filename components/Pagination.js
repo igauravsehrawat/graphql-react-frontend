@@ -24,7 +24,7 @@ const Pagination = props => (
       console.log({ data });
       const { count } = data.itemsConnection.aggregate;
       const totalPages = Math.ceil(count / perPage);
-      const { page } = props;
+      const { page, whichPage } = props;
       if (loading) return <p>Loading...</p>;
       return (
         <PaginationStyles>
@@ -36,11 +36,11 @@ const Pagination = props => (
           <Link
             prefetch
             href={{
-              pathname: props.whichPage,
-              query: { page: props.page - 1 },
+              pathname: whichPage,
+              query: { page: page - 1 },
             }}
           >
-            <a className="prev" aria-disabled={props.page <= 1}>
+            <a className="prev" aria-disabled={page <= 1}>
               ◀◀ Prev
             </a>
           </Link>
@@ -51,11 +51,11 @@ const Pagination = props => (
           <Link
             prefetch
             href={{
-              pathname: props.whichPage,
-              query: { page: props.page + 1 },
+              pathname: whichPage,
+              query: { page: page + 1 },
             }}
           >
-            <a className="next" aria-disabled={props.page >= totalPages}>
+            <a className="next" aria-disabled={page >= totalPages}>
               Next ▶▶
             </a>
           </Link>
@@ -66,3 +66,4 @@ const Pagination = props => (
 );
 
 export default Pagination;
+export { ITEMS_CONNECTION_QUERY };
