@@ -25,11 +25,10 @@ exports[`<Pagination/> renders pagination for 18 items 1`] = `
       href="items?page=0"
       onClick={[Function]}
     >
-      ← Prev
+      ◀◀ Prev
     </a>
   </Link>
   <p>
-    Page 
     1
      of
     <span
@@ -37,11 +36,10 @@ exports[`<Pagination/> renders pagination for 18 items 1`] = `
     >
       5
     </span>
-    !
   </p>
   <p>
+    Total items 
     18
-     Items Total
   </p>
   <Link
     href={
@@ -60,7 +58,7 @@ exports[`<Pagination/> renders pagination for 18 items 1`] = `
       href="items?page=2"
       onClick={[Function]}
     >
-      Next →
+      Next ▶▶
     </a>
   </Link>
 </div>

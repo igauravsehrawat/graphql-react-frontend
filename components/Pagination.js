@@ -20,14 +20,13 @@ const ITEMS_CONNECTION_QUERY = gql`
 const Pagination = props => (
   <Query query={ITEMS_CONNECTION_QUERY}>
     {({ data, loading, error }) => {
+      if (loading) return <p>Loading...</p>;
       if (error) return <Error error={error} />;
-      console.log({ data });
       const { count } = data.itemsConnection.aggregate;
       const totalPages = Math.ceil(count / perPage);
       const { page, whichPage } = props;
-      if (loading) return <p>Loading...</p>;
       return (
-        <PaginationStyles>
+        <PaginationStyles data-test="pagination">
           <Head>
             <title>
               Dev Fits -- Page {page} of {totalPages}
@@ -45,7 +44,8 @@ const Pagination = props => (
             </a>
           </Link>
           <p>
-            {page} of {totalPages}
+            {page} of
+            <span className="totalPages">{totalPages}</span>
           </p>
           <p>Total items {data.itemsConnection.aggregate.count}</p>
           <Link

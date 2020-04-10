@@ -26,7 +26,7 @@ describe('Item', () => {
   it('renders title and price tag', () => {
     const rendered = shallow(<ItemComponent item={fakeItem} />);
     const priceTag = rendered.find('PriceTag');
-    expect(priceTag.children().text()).toBe('€10');
+    expect(priceTag.children().text()).toBe('€1');
     expect(rendered.find('Title Link a').text()).toBe(fakeItem.title);
   });
 
