@@ -40,7 +40,7 @@ export default class RemoveFromCart extends Component {
     const data = cache.readQuery({ query: CURRENT_USER_QUERY });
     if (data && !data.me) return null;
     data.me.cart = data.me.cart.filter(
-      cartItem => cartItem !== payload.removeFromCart.id
+      cartItem => cartItem !== payload.data.removeFromCart.id
     );
     cache.writeQuery({ query: CURRENT_USER_QUERY, data });
   };

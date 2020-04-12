@@ -71,11 +71,11 @@ describe('<RemoveFromCart />', () => {
     expect(me.cart).toHaveLength(1);
     expect(me.cart[0].item.price).toEqual(5000);
     wrapper.find('button').simulate('click');
-    // await wait();
-    // const {
-    //   data: {
-    //     me: { me2 },
-    //   },
-    // } = await apolloClient.query({ query: CURRENT_USER_QUERY });
+    await wait();
+    const {
+      data: {
+        me: { me2 },
+      },
+    } = await apolloClient.query({ query: CURRENT_USER_QUERY });
   });
 });
