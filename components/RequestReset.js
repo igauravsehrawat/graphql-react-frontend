@@ -33,7 +33,6 @@ export default class RequestReset extends Component {
       >
         {(requestReset, { data, error, loading, called }) => {
           if (error) return <Error error={error} />;
-          if (loading) return <p>Loading...</p>;
           return (
             <Form
               method="post"
@@ -45,7 +44,7 @@ export default class RequestReset extends Component {
               data-test="form"
             >
               <fieldset>
-                <p>Reset Password</p>
+                <h2>Reset Password</h2>
                 <Error error={error} />
                 {!loading && !error && called && (
                   <p>Success, check your email!</p>

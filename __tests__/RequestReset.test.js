@@ -11,7 +11,7 @@ const mocks = [
   {
     request: {
       query: REQUEST_RESET_MUTATION,
-      variables: { email: 'me@igauravsehrawat.com' },
+      variables: { email: 'root@igauravsehrawat.com' },
     },
     result: {
       data: { requestReset: { message: 'success', __typename: 'Message' } },
