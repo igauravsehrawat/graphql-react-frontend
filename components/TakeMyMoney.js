@@ -31,13 +31,13 @@ const totalItems = cart =>
   cart.reduce((tally, item) => tally + item.quantity, 0);
 
 class TakeMyMoney extends Component {
-  propTypes = {
+  static propTypes = {
     closeCart: PropTypes.func.isRequired,
   };
 
   onToken = async (res, createOrder) => {
     // manually call the mutation
-    this.props.closeCart();
+    // this.props.closeCart();
     NProgress.start();
     const order = await createOrder({
       variables: { token: res.id },

@@ -90,3 +90,5 @@ export default class Order extends Component {
 Order.propTypes = {
   id: PropTypes.string.isRequired,
 };
+
+export { SINGLE_ORDER_QUERY };
