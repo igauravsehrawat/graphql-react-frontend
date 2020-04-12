@@ -18,8 +18,8 @@ const BigButton = styled.button`
   border: 0;
   background: none;
   &:hover {
-    color: ${props => props.theme.red}
-    cursor: pointer
+    color: ${props => props.theme.red};
+    cursor: pointer;
   }
 `;
 
@@ -49,7 +49,7 @@ export default class RemoveFromCart extends Component {
     return (
       <Mutation
         mutation={REMOVE_FROM_CART_MUTATION}
-        refetchQueries={[{ query: CURRENT_USER_QUERY }]}
+        variables={{ id: this.props.id }}
         update={this.update}
         optimisticResponse={{
           __typename: 'Mutation',
@@ -76,3 +76,4 @@ export default class RemoveFromCart extends Component {
     );
   }
 }
+export { REMOVE_FROM_CART_MUTATION };

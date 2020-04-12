@@ -7,7 +7,6 @@ import { MockedProvider } from 'react-apollo/test-utils';
 import AddToCart, { ADD_TO_CART_MUTATION } from '../components/AddToCart';
 import { fakeUser, fakeCartItem } from '../lib/testUtils';
 import { CURRENT_USER_QUERY } from '../components/User';
-import { LOCAL_STATE_QUERY } from '../components/Cart';
 
 const mocks = [
   {
@@ -49,7 +48,7 @@ const mocks = [
   },
 ];
 
-describe.only('<AddToCart/>', () => {
+describe('<AddToCart/>', () => {
   it('renders and matches the snap shot', async () => {
     const wrapper = mount(
       <MockedProvider mocks={mocks}>

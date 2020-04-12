@@ -5,6 +5,7 @@ exports[`<AddToCart/> renders and matches the snap shot 1`] = `
   disabled={false}
   onClick={[Function]}
 >
-  Add To Cart 🛒
+  Add
+   To Cart 🛒
 </button>
 `;
