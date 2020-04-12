@@ -8,9 +8,9 @@ exports[`<RequestReset/> renders and matches snapshot 1`] = `
   onSubmit={[Function]}
 >
   <fieldset>
-    <p>
+    <h2>
       Reset Password
-    </p>
+    </h2>
     <DisplayError
       error={Object {}}
     />

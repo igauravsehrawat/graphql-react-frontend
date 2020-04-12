@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
-import Form from './styles/Form';
+import React, { Component } from 'react';
 import gql from 'graphql-tag';
 import { Mutation } from 'react-apollo';
 import Router from 'next/router';
-import Error from '../components/ErrorMessage';
+import Form from './styles/Form';
+import Error from './ErrorMessage';
 
 const CREATE_ITEM_MUTATION = gql`
   mutation CREATE_ITEM_MUTATION(
@@ -27,7 +27,6 @@ const CREATE_ITEM_MUTATION = gql`
 
 class CreateItem extends Component {
   state = {
-    id: '',
     title: '',
     description: '',
     price: 0,
@@ -35,37 +34,40 @@ class CreateItem extends Component {
     largeImage: '',
   };
 
-  handleChange = (e) => {
-    console.log(e);
-    const { name, type, value } = e.target
-    console.log({name, value, type});
-    const typeValue = type==='number'? parseFloat(value): value;
+  handleChange = e => {
+    const { name, type, value } = e.target;
+    console.log({ name, value, type });
+    const typeValue = type === 'number' ? parseFloat(value) : value;
     this.setState({
-      [name]: typeValue
+      [name]: typeValue,
     });
   };
 
   handleUpload = async e => {
     const { files } = e.target;
     const data = new FormData();
-    data.append('file', files[0])
+    data.append('file', files[0]);
     data.append('upload_preset', 'devFits');
-    const res = await fetch('https://api.cloudinary.com/v1_1/igauravsehrawat/image/upload', {
-      method: 'POST',
-      body: data,
-    });
+    const res = await fetch(
+      'https://api.cloudinary.com/v1_1/igauravsehrawat/image/upload',
+      {
+        method: 'POST',
+        body: data,
+      }
+    );
     const file = await res.json();
     this.setState({
       image: file.secure_url,
       largeImage: file.eager[0].secure_url,
     });
   };
+
   render() {
     return (
       <Mutation mutation={CREATE_ITEM_MUTATION} variables={this.state}>
-      {( createItem, {loading, error}) => (
-          <Form onSubmit={
-            async e => {
+        {(createItem, { loading, error }) => (
+          <Form
+            onSubmit={async e => {
               // prevent default
               e.preventDefault();
               // call mutation
@@ -74,11 +76,11 @@ class CreateItem extends Component {
               // change the route
               Router.push({
                 pathname: '/item',
-                query: { id: res.data.createItem.id }
+                query: { id: res.data.createItem.id },
               });
             }}
-            >
-            <Error error={error}/>
+          >
+            <Error error={error} />
             <fieldset disabled={loading} aria-busy={loading}>
               <label htmlFor="image">Image</label>
               <input
@@ -87,7 +89,9 @@ class CreateItem extends Component {
                 type="file"
                 onChange={this.handleUpload}
               />
-              {this.state.image && <img width="200" src={this.state.image} alt="Upload preview" />}
+              {this.state.image && (
+                <img width="200" src={this.state.image} alt="Upload preview" />
+              )}
               <label htmlFor="title">Title</label>
               <input
                 id="title"
@@ -95,7 +99,7 @@ class CreateItem extends Component {
                 type="text"
                 value={this.state.title}
                 placeholder="Enter title"
-                required={true}
+                required
                 onChange={this.handleChange}
               />
               <label htmlFor="price">Price</label>
@@ -105,7 +109,7 @@ class CreateItem extends Component {
                 type="number"
                 value={this.state.price}
                 placeholder="Enter price"
-                required={true}
+                required
                 onChange={this.handleChange}
               />
               <label htmlFor="description"></label>
@@ -114,15 +118,15 @@ class CreateItem extends Component {
                 name="description"
                 value={this.state.description}
                 placeholder="Enter description"
-                required={true}
+                required
                 onChange={this.handleChange}
               />
               <button type="submit">Submit</button>
             </fieldset>
           </Form>
-      )}
+        )}
       </Mutation>
-    )
+    );
   }
 }
 
