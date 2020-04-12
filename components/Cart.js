@@ -55,12 +55,12 @@ export default class Cart extends Component {
                   You have {me.cart.length} item {me.cart.length > 1 && 's'} in
                   your cart.
                 </p>
-                <ul>
-                  {me.cart.map(cartItem => (
-                    <CartItem key={cartItem.id} cartItem={cartItem} />
-                  ))}
-                </ul>
               </header>
+              <ul>
+                {me.cart.map(cartItem => (
+                  <CartItem key={cartItem.id} cartItem={cartItem} />
+                ))}
+              </ul>{' '}
               <footer>
                 <p>Your total is {formatMoney(calcTotalPrice(me.cart))}</p>
                 {me.cart.length && (
