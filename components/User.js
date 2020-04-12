@@ -7,6 +7,7 @@ const CURRENT_USER_QUERY = gql`
     me {
       id
       name
+      email
       permissions
       orders {
         id

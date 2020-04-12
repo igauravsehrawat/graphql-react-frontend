@@ -56,7 +56,7 @@ describe('<Signup />', () => {
   it('calls the mutation properly', async () => {
     let apolloClient;
     const wrapper = mount(
-      <MockedProvider>
+      <MockedProvider mocks={mocks}>
         <ApolloConsumer>
           {client => {
             apolloClient = client;
