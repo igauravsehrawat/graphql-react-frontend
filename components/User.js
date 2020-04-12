@@ -8,6 +8,9 @@ const CURRENT_USER_QUERY = gql`
       id
       name
       permissions
+      orders {
+        id
+      }
       cart {
         id
         quantity
