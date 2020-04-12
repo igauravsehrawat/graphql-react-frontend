@@ -52,32 +52,36 @@ class TakeMyMoney extends Component {
   render() {
     return (
       <User>
-        {({ data: { me } }) => (
-          <Mutation
-            mutation={CREATE_ORDER_MUTATION}
-            refetchQueries={[{ query: CURRENT_USER_QUERY }]}
-          >
-            {(createOrder, { data, error, loading }) => (
-              <StripeCheckout
-                name={me.name}
-                description={`Total of ${totalItems(me.cart)} items`}
-                image={
-                  me.cart.length && me.cart[0].item && me.cart[0].item.image
-                }
-                stripeKey="pk_test_3X4xxalHxsddJSFXxNt5coU3"
-                currency="USD"
-                email={me.email}
-                amount={calcTotalPrice(me.cart)}
-                token={res => this.onToken(res, createOrder)}
-              >
-                <p>{this.props.children}</p>
-              </StripeCheckout>
-            )}
-          </Mutation>
-        )}
+        {({ data: { me }, loading }) => {
+          if (loading) return null;
+          return (
+            <Mutation
+              mutation={CREATE_ORDER_MUTATION}
+              refetchQueries={[{ query: CURRENT_USER_QUERY }]}
+            >
+              {(createOrder, { data, error, loading }) => (
+                <StripeCheckout
+                  name={me.name}
+                  description={`Total of ${totalItems(me.cart)} items`}
+                  image={
+                    me.cart.length && me.cart[0].item && me.cart[0].item.image
+                  }
+                  stripeKey="pk_test_3X4xxalHxsddJSFXxNt5coU3"
+                  currency="USD"
+                  email={me.email}
+                  amount={calcTotalPrice(me.cart)}
+                  token={res => this.onToken(res, createOrder)}
+                >
+                  <p>{this.props.children}</p>
+                </StripeCheckout>
+              )}
+            </Mutation>
+          );
+        }}
       </User>
     );
   }
 }
 
 export default TakeMyMoney;
+export { CREATE_ORDER_MUTATION };
