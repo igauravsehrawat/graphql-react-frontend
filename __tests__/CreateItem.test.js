@@ -72,14 +72,15 @@ describe('<CreateItem />', () => {
   });
 
   it('creates an item when the form is submitted', async () => {
-    const { title, description, price } = fakeItem();
+    const item = fakeItem();
+    const { title, description, price } = item;
     const mocks = [
       {
         request: {
           query: CREATE_ITEM_MUTATION,
           variables: {
             title,
-            describe: description,
+            description,
             image: '',
             largeImage: '',
             price,
@@ -88,7 +89,7 @@ describe('<CreateItem />', () => {
         result: {
           data: {
             createItem: {
-              ...fakeItem,
+              ...item,
               id: 'abc123',
               __typename: 'Item',
             },
@@ -114,5 +115,9 @@ describe('<CreateItem />', () => {
     wrapper.find('form').simulate('submit');
     await wait();
     expect(Router.router.push).toHaveBeenCalled();
+    expect(Router.router.push).toHaveBeenCalledWith({
+      pathname: '/item',
+      query: { id: 'abc123' },
+    });
   });
 });
