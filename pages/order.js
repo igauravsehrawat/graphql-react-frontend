@@ -5,7 +5,6 @@ import Order from '../components/Order';
 const OrderPage = props => (
   <div>
     <PleaseSignIn>
-      <p>This is a single order.</p>
       <Order id={props.query.id} />
     </PleaseSignIn>
   </div>

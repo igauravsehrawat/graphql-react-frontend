@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
+import User from './User';
 import ItemStyles from './styles/ItemStyles';
 import Title from './styles/Title';
 import PriceTag from './styles/PriceTag';
@@ -19,35 +20,39 @@ export default class Item extends Component {
       item: { id, image, title, price, description },
     } = this.props;
     return (
-      <div>
-        <ItemStyles>
-          {image && <img src={image} alt={title} />}
-          <Title>
-            <Link
-              href={{
-                pathname: '/item',
-                query: { id },
-              }}
-            >
-              <a>{title}</a>
-            </Link>
-          </Title>
-          <PriceTag>{formatMoney(price)}</PriceTag>
-          <p>{description}</p>
-          <div className="buttonList">
-            <Link
-              href={{
-                pathname: '/update',
-                query: { id },
-              }}
-            >
-              <button>Edit ✏️</button>
-            </Link>
-            <AddToCart id={id} />
-            <DeleteItem id={id}>Delete this item</DeleteItem>
-          </div>
-        </ItemStyles>
-      </div>
+      <User>
+        {({ data: { me } }) => (
+          <ItemStyles>
+            {image && <img src={image} alt={title} />}
+            <Title>
+              <Link
+                href={{
+                  pathname: '/item',
+                  query: { id },
+                }}
+              >
+                <a>{title}</a>
+              </Link>
+            </Title>
+            <PriceTag>{formatMoney(price)}</PriceTag>
+            <p>{description}</p>
+            {me && (
+              <div className="buttonList">
+                <Link
+                  href={{
+                    pathname: '/update',
+                    query: { id },
+                  }}
+                >
+                  <button>Edit ✏️</button>
+                </Link>
+                <AddToCart id={id} />
+                <DeleteItem id={id}>Delete this item</DeleteItem>
+              </div>
+            )}
+          </ItemStyles>
+        )}
+      </User>
     );
   }
 }
