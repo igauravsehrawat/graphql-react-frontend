@@ -63,7 +63,7 @@ export default class Cart extends Component {
               </ul>{' '}
               <footer>
                 <p>Your total is {formatMoney(calcTotalPrice(me.cart))}</p>
-                {me.cart.length && (
+                {me.cart.length > 0 && (
                   <TakeMyMoney closeCart={toggleCart}>
                     <SickButton>Checkout</SickButton>
                   </TakeMyMoney>
