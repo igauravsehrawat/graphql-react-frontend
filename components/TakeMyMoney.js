@@ -38,6 +38,10 @@ class TakeMyMoney extends Component {
   onToken = async (res, createOrder) => {
     // manually call the mutation
     // this.props.closeCart();
+    const { closeCart } = this.props;
+    if (closeCart) {
+      closeCart();
+    }
     NProgress.start();
     const order = await createOrder({
       variables: { token: res.id },
