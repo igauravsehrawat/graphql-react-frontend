@@ -75,7 +75,7 @@ class UserPermissions extends Component {
   }
 
   handlePermissionChange = (e, updatePermissions) => {
-    console.log(e.target.value, e.target, e.target.checked);
+    // console.log(e.target.value, e.target, e.target.checked);
     const value = e.target.value;
     const checked = e.target.checked;
     let updatedPermissions = [...this.state.permissions];

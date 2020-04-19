@@ -20,7 +20,7 @@ class DeleteItem extends Component {
       item => item.id !== payload.data.deleteItem.id
     );
     // 3. Write cache
-    console.log(data);
+    // console.log(data);
     cache.writeQuery({ query: ALL_ITEMS_QUERY, data });
   };
 
@@ -30,6 +30,7 @@ class DeleteItem extends Component {
         mutation={DELETE_ITEM_MUTATION}
         variables={{ id: this.props.id }}
         update={this.onUpdate}
+        refetchQueries={[{ query: ALL_ITEMS_QUERY }]}
       >
         {(deleteItem, { loading, error }) => {
           {

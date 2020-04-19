@@ -10,7 +10,7 @@ import RemoveFromCart, {
 import { fakeUser, fakeCartItem } from '../lib/testUtils';
 import { CURRENT_USER_QUERY } from '../components/User';
 
-global.alert = console.log;
+global.alert = // console.log;
 
 const mocks = [
   {

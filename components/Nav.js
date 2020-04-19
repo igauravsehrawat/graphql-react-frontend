@@ -3,6 +3,7 @@ import { Mutation } from 'react-apollo';
 import NavStyles from './styles/NavStyles';
 import User from './User';
 import Signout from './Signout';
+import Permissions from './Permissions';
 import { TOGGLE_CART_MUTATION } from './Cart';
 import CartCount from './CartCount';
 
@@ -20,6 +21,9 @@ const Nav = () => (
             </Link>
             <Link href="/orders">
               <a>Orders</a>
+            </Link>
+            <Link href="/permissions">
+              <a>Permissions</a>
             </Link>
           </>
         )}

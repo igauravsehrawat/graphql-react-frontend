@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import Signup from '../components/Signup';
-import SignIn from '../components/Signin';
+import Signin from '../components/Signin';
 import RequestReset from '../components/RequestReset';
 
 const Columns = styled.div`
@@ -15,7 +15,7 @@ class SignupPage extends Component {
     return (
       <Columns>
         <Signup></Signup>
-        <SignIn></SignIn>
+        <Signin />
         <RequestReset />
       </Columns>
     );

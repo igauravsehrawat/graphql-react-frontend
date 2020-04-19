@@ -50,7 +50,7 @@ class TakeMyMoney extends Component {
       pathname: '/order',
       query: { id: order.data.createOrder.id },
     });
-    console.log(order);
+    // console.log(order);
   };
 
   render() {

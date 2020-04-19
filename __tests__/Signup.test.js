@@ -75,7 +75,7 @@ describe('<Signup />', () => {
     await wait();
     // query the current user
     const user = await apolloClient.query({ query: CURRENT_USER_QUERY });
-    console.log({ user });
+    // console.log({ user });
     expect(user.data.me).toMatchObject(me);
   });
 });

@@ -24,7 +24,7 @@ export default class Signin extends Component {
 
   saveToState = e => {
     const { name, value } = e.target;
-    console.log({ name, value });
+    // console.log({ name, value });
     this.setState({ [name]: value });
   };
 

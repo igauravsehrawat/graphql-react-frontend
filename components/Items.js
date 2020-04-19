@@ -46,7 +46,7 @@ class Items extends Component {
           }}
         >
           {({ data, error, loading }) => {
-            console.log(this.props.page * perPage - perPage, { data });
+            // console.log(this.props.page * perPage - perPage, { data });
             if (loading) return <p>Loading...</p>;
             if (error) return <p>Error: {error.message}</p>;
             return (
@@ -59,6 +59,9 @@ class Items extends Component {
           }}
         </Query>
         <Pagination page={this.props.page} />
+        <p>
+          Inspired by <a href="https://wesbos.com/">Wes Bos</a>
+        </p>
       </Center>
     );
   }

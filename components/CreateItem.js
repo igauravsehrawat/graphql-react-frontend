@@ -36,7 +36,7 @@ class CreateItem extends Component {
 
   handleChange = e => {
     const { name, type, value } = e.target;
-    console.log({ name, value, type });
+    // console.log({ name, value, type });
     const typeValue = type === 'number' ? parseFloat(value) : value;
     this.setState({
       [name]: typeValue,
@@ -72,7 +72,7 @@ class CreateItem extends Component {
               e.preventDefault();
               // call mutation
               const res = await createItem();
-              console.log({ res });
+              // console.log({ res });
               // change the route
               Router.push({
                 pathname: '/item',

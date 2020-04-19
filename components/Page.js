@@ -11,10 +11,10 @@ const theme = {
   offWhite: '#EDEDED',
   maxWidth: '1500px',
   bs: '0 12px 24px rgba(0, 0, 0, 0.01)',
-}
+};
 
 const StyledPage = styled.div`
-  background-color: ${props => props.theme.offWhite};
+  background-color: white;
   color: ${props => props.theme.black};
 `;
 

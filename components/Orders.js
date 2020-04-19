@@ -54,7 +54,7 @@ export default class Order extends Component {
           }}
         >
           {({ data, error, loading }) => {
-            console.log(this.props.page * perPage - perPage, { data });
+            // console.log(this.props.page * perPage - perPage, { data });
             if (loading) return <p>Loading...</p>;
             if (error) return <p>Error: {error.message}</p>;
             const { orders } = data;

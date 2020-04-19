@@ -42,9 +42,9 @@ const UPDATE_ITEM_MUTATION = gql`
 
 class UpdateItem extends Component {
   handleChange = (e) => {
-    console.log(e);
+    // console.log(e);
     const { name, type, value } = e.target
-    console.log({name, value, type});
+    // console.log({name, value, type});
     const typeValue = type==='number'? parseFloat(value): value;
     this.setState({
       [name]: typeValue
@@ -60,7 +60,7 @@ class UpdateItem extends Component {
           ...this.state
         }
       });
-      console.log('Updated with!!', { res });
+      // console.log('Updated with!!', { res });
   }
 
   handleUpload = async e => {
@@ -86,7 +86,7 @@ class UpdateItem extends Component {
       {({data, loading}) => {
         if (loading) <p>Loading...</p>
         if (data.item) <p>No item found!!</p>
-        console.log({ data });
+        // console.log({ data });
         return (
       <Mutation mutation={UPDATE_ITEM_MUTATION} variables={this.state}>
       {( updateItem, {loading, error}) => (
