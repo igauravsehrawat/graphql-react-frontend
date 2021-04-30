@@ -49,7 +49,7 @@ class CreateItem extends Component {
     data.append('file', files[0]);
     data.append('upload_preset', 'devFits');
     const res = await fetch(
-      'https://api.cloudinary.com/v1_1/igauravsehrawat/image/upload',
+      'https://api.cloudinary.com/v1_1/af0lqrya/image/upload',
       {
         method: 'POST',
         body: data,
