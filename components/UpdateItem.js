@@ -45,13 +45,7 @@ const UPDATE_ITEM_MUTATION = gql`
 `;
 
 class UpdateItem extends Component {
-  state = {
-    title: '',
-    description: '',
-    price: 0,
-    image: '',
-    largeImage: '',
-  };
+  state = {};
 
   handleChange = e => {
     // console.log(e);
@@ -91,7 +85,7 @@ class UpdateItem extends Component {
     const file = await res.json();
     this.setState({
       image: file.secure_url,
-      largeImage: file.eager[0].secure_url,
+      largeImage: file.secure_url,
     });
   };
 
@@ -101,7 +95,7 @@ class UpdateItem extends Component {
         {({ data, loading }) => {
           if (loading) <p>Loading...</p>;
           if (data.item) <p>No item found!!</p>;
-          // console.log({ data });
+          console.log({ data });
           return (
             <Mutation mutation={UPDATE_ITEM_MUTATION} variables={this.state}>
               {(updateItem, { loading, error }) => (
@@ -115,10 +109,10 @@ class UpdateItem extends Component {
                       type="file"
                       onChange={this.handleUpload}
                     />
-                    {this.state.image && (
+                    {data.item.image && (
                       <img
                         width="200"
-                        src={this.state.image}
+                        src={data.item.image}
                         alt="Upload preview"
                       />
                     )}
