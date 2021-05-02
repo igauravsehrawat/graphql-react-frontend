@@ -109,10 +109,10 @@ class UpdateItem extends Component {
                       type="file"
                       onChange={this.handleUpload}
                     />
-                    {data.item.image && (
+                    {this.state.image && (
                       <img
                         width="200"
-                        src={data.item.image}
+                        src={this.state.image}
                         alt="Upload preview"
                       />
                     )}
